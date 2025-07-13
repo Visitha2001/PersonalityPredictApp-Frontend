@@ -29,7 +29,7 @@ export const ResultDisplay = ({ result, darkMode }) => {
           {result.prediction}
         </h2>
         
-        <div className={`w-full rounded-3xl border border-gray-500 p-6 ${darkMode ? 'bg-gray-800' : 'bg-white'} shadow-lg`}>
+        <div className={`w-full rounded-3xl border ${borderColor} p-6 ${darkMode ? 'bg-gray-800' : 'bg-white'} shadow-lg`}>
           <div className="flex justify-between items-center mb-6">
             <span className={`${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>Confidence:</span>
             <div className="flex items-center">
