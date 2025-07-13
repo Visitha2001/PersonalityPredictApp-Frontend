@@ -28,7 +28,17 @@ export const PersonalityForm = () => {
     }
   };
 
-  const [formData, setFormData] = useState({});
+  // Initialize formData with default values
+  const [formData, setFormData] = useState({
+    Time_spent_Alone: 0,
+    Social_event_attendance: 0,
+    Going_outside: 0,
+    Friends_circle_size: 0,
+    Post_frequency: 0,
+    Stage_fear: 'No',
+    Drained_after_socializing: 'No'
+  });
+
   const [result, setResult] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [darkMode, setDarkMode] = useState(true);
@@ -74,7 +84,15 @@ export const PersonalityForm = () => {
   };
 
   const loadSample = (type) => {
-    setFormData(SAMPLE_DATA[type]);
+    // Ensure we're using a valid sample type
+    if (!SAMPLE_DATA[type]) {
+      toast.error('Invalid sample type');
+      return;
+    }
+    
+    // Create a new object to avoid potential reference issues
+    const sampleData = { ...SAMPLE_DATA[type] };
+    setFormData(sampleData);
     setResult(null);
     toast.success(`${type.charAt(0).toUpperCase() + type.slice(1)} sample loaded`);
   };
@@ -163,31 +181,82 @@ export const PersonalityForm = () => {
               ))}
 
               {/* Radio Groups */}
-              {[
-                { label: 'Do you have stage fear?', name: 'Stage_fear' },
-                { label: 'Do you feel drained after socializing?', name: 'Drained_after_socializing' }
-              ].map((group) => (
-                <div key={group.name} className="space-y-2">
-                  <label className={`block text-sm font-medium ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
-                    {group.label}
-                  </label>
-                  <div className="flex space-x-4">
-                    {['Yes', 'No'].map((option) => (
-                      <label key={option} className="inline-flex items-center">
-                        <input
-                          type="radio"
-                          name={group.name}
-                          value={option}
-                          checked={formData[group.name] === option}
-                          onChange={handleChange}
-                          className={`h-4 w-4 ${darkMode ? 'text-indigo-400' : 'text-indigo-600'} focus:ring-indigo-500`}
-                        />
-                        <span className={`ml-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>{option}</span>
-                      </label>
-                    ))}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {[
+                  { 
+                    label: 'Do you have stage fear?', 
+                    name: 'Stage_fear',
+                    icon: (
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
+                        <path d="M7.5 6a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM3.751 20.105a8.25 8.25 0 0116.498 0 .75.75 0 01-.437.695A18.683 18.683 0 0112 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 01-.437-.695z" />
+                        <path fillRule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zM9 7.5A.75.75 0 009 9h1.5c.98 0 1.813.626 2.122 1.5H9A.75.75 0 009 12h3.622a2.251 2.251 0 01-2.122 1.5H9a.75.75 0 000 1.5h1.5a2.251 2.251 0 012.122 1.5H9a.75.75 0 000 1.5h3.622A2.251 2.251 0 0110.5 18H9a.75.75 0 000 1.5h1.5a3.75 3.75 0 003.75-3.75V12a.75.75 0 00-.75-.75h-3.5a.75.75 0 01-.75-.75V9A.75.75 0 0112 7.5H9z" clipRule="evenodd" />
+                      </svg>
+                    )
+                  },
+                  { 
+                    label: 'Do you feel drained after socializing?', 
+                    name: 'Drained_after_socializing',
+                    icon: (
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
+                        <path fillRule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm-2.625 6c-.54 0-.828.419-.936.634a1.96 1.96 0 00-.189.866c0 .298.059.605.189.866.108.215.395.634.936.634.54 0 .828-.419.936-.634.13-.26.189-.568.189-.866 0-.298-.059-.605-.189-.866-.108-.215-.395-.634-.936-.634zm4.314.634c.108-.215.395-.634.936-.634.54 0 .828.419.936.634.13.26.189.568.189.866 0 .298-.059.605-.189.866-.108.215-.395.634-.936.634-.54 0-.828-.419-.936-.634a1.96 1.96 0 01-.189-.866c0-.298.059-.605.189-.866zm-4.34 7.964a.75.75 0 01-1.061-1.06 5.236 5.236 0 013.73-1.538 5.236 5.236 0 013.695 1.538.75.75 0 11-1.061 1.06 3.736 3.736 0 00-2.639-1.098 3.736 3.736 0 00-2.664 1.098z" clipRule="evenodd" />
+                      </svg>
+                    )
+                  }
+                ].map((group) => (
+                  <div 
+                    key={group.name} 
+                    className={`p-4 rounded-lg border transition-all ${darkMode ? 
+                      formData[group.name] === 'Yes' ? 'border-indigo-500 bg-indigo-900/20' : 'border-gray-700 bg-gray-800' : 
+                      formData[group.name] === 'Yes' ? 'border-indigo-300 bg-indigo-50' : 'border-gray-200 bg-white'}`}
+                  >
+                    <div className="flex items-center space-x-3 mb-3">
+                      <div className={`p-2 rounded-full ${darkMode ? 
+                        formData[group.name] === 'Yes' ? 'bg-indigo-800 text-indigo-200' : 'bg-gray-700 text-gray-400' : 
+                        formData[group.name] === 'Yes' ? 'bg-indigo-100 text-indigo-600' : 'bg-gray-100 text-gray-500'}`}>
+                        {group.icon}
+                      </div>
+                      <h3 className={`text-sm font-medium ${darkMode ? 'text-gray-200' : 'text-gray-800'}`}>
+                        {group.label}
+                      </h3>
+                    </div>
+                    <div className="flex space-x-4">
+                      {['Yes', 'No'].map((option) => (
+                        <label 
+                          key={option} 
+                          className={`flex-1 py-2 px-4 rounded-md cursor-pointer transition-colors ${darkMode ? 
+                            formData[group.name] === option ? 
+                              option === 'Yes' ? 'bg-indigo-600 text-white' : 'bg-gray-700 text-white' : 
+                              'bg-gray-700 hover:bg-gray-600 text-gray-300' : 
+                            formData[group.name] === option ? 
+                              option === 'Yes' ? 'bg-indigo-500 text-white' : 'bg-gray-200 text-gray-800' : 
+                              'bg-gray-100 hover:bg-gray-200 text-gray-700'}`}
+                        >
+                          <input
+                            type="radio"
+                            name={group.name}
+                            value={option}
+                            checked={formData[group.name] === option}
+                            onChange={handleChange}
+                            className="sr-only"
+                          />
+                          <div className="flex items-center justify-center space-x-2">
+                            <span>{option}</span>
+                            {option === 'Yes' ? (
+                              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4">
+                                <path fillRule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clipRule="evenodd" />
+                              </svg>
+                            ) : (
+                              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4">
+                                <path d="M6.28 5.22a.75.75 0 00-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 101.06 1.06L10 11.06l3.72 3.72a.75.75 0 101.06-1.06L11.06 10l3.72-3.72a.75.75 0 00-1.06-1.06L10 8.94 6.28 5.22z" />
+                              </svg>
+                            )}
+                          </div>
+                        </label>
+                      ))}
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
 
               <div className="flex space-x-4">
                 <button
