@@ -206,13 +206,17 @@ export const PersonalityForm = () => {
                   <div 
                     key={group.name} 
                     className={`p-4 rounded-lg border transition-all ${darkMode ? 
-                      formData[group.name] === 'Yes' ? 'border-indigo-500 bg-indigo-900/20' : 'border-gray-700 bg-gray-800' : 
-                      formData[group.name] === 'Yes' ? 'border-indigo-300 bg-indigo-50' : 'border-gray-200 bg-white'}`}
+                      formData[group.name] === 'Yes' ? 'border-green-500 bg-green-900/20' : 
+                      formData[group.name] === 'No' ? 'border-red-500 bg-red-900/20' : 'border-gray-700 bg-gray-800' : 
+                      formData[group.name] === 'Yes' ? 'border-green-300 bg-green-50' : 
+                      formData[group.name] === 'No' ? 'border-red-300 bg-red-50' : 'border-gray-200 bg-white'}`}
                   >
                     <div className="flex items-center space-x-3 mb-3">
                       <div className={`p-2 rounded-full ${darkMode ? 
-                        formData[group.name] === 'Yes' ? 'bg-indigo-800 text-indigo-200' : 'bg-gray-700 text-gray-400' : 
-                        formData[group.name] === 'Yes' ? 'bg-indigo-100 text-indigo-600' : 'bg-gray-100 text-gray-500'}`}>
+                        formData[group.name] === 'Yes' ? 'bg-green-800 text-green-200' : 
+                        formData[group.name] === 'No' ? 'bg-red-800 text-red-200' : 'bg-gray-700 text-gray-400' : 
+                        formData[group.name] === 'Yes' ? 'bg-green-100 text-green-600' : 
+                        formData[group.name] === 'No' ? 'bg-red-100 text-red-600' : 'bg-gray-100 text-gray-500'}`}>
                         {group.icon}
                       </div>
                       <h3 className={`text-sm font-medium ${darkMode ? 'text-gray-200' : 'text-gray-800'}`}>
@@ -225,10 +229,10 @@ export const PersonalityForm = () => {
                           key={option} 
                           className={`flex-1 py-2 px-4 rounded-md cursor-pointer transition-colors ${darkMode ? 
                             formData[group.name] === option ? 
-                              option === 'Yes' ? 'bg-indigo-600 text-white' : 'bg-gray-700 text-white' : 
+                              option === 'Yes' ? 'bg-green-600 text-white' : 'bg-red-600 text-white' : 
                               'bg-gray-700 hover:bg-gray-600 text-gray-300' : 
                             formData[group.name] === option ? 
-                              option === 'Yes' ? 'bg-indigo-500 text-white' : 'bg-gray-200 text-gray-800' : 
+                              option === 'Yes' ? 'bg-green-500 text-white' : 'bg-red-500 text-white' : 
                               'bg-gray-100 hover:bg-gray-200 text-gray-700'}`}
                         >
                           <input
@@ -272,11 +276,11 @@ export const PersonalityForm = () => {
         </div>
 
         {/* Result Section */}
-        <div className={`w-full md:w-1/2 flex items-center justify-center p-8 ${darkMode ? 'bg-gray-900' : 'bg-gray-50'}`}>
+        <div className={`w-full md:w-1/2 mt-10 flex items-center justify-center p-8 ${darkMode ? 'bg-gray-900' : 'bg-gray-50'}`}>
           {result ? (
             <ResultDisplay result={result} darkMode={darkMode} />
           ) : (
-            <div className="text-center">
+            <div className="text-center rounded-4xl border-2 border-blue-600 p-15">
               <div className="mx-auto h-48 w-48 rounded-full bg-blue-300 flex items-center justify-center mb-6">
                 <img
                   src={'/personality.png'}
