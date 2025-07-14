@@ -7,7 +7,7 @@ export const ResultDisplay = ({ result, darkMode }) => {
   // Dark mode adjustments
   const bgColor = darkMode ? 
     (isIntrovert ? 'bg-indigo-900/30' : 'bg-green-900/30') : 
-    (isIntrovert ? 'bg-indigo-50' : 'bg-green-50');
+    (isIntrovert ? 'bg-indigo-200' : 'bg-green-200');
   
   const borderColor = darkMode ? 
     (isIntrovert ? 'border-indigo-500' : 'border-green-500') : 
@@ -18,7 +18,7 @@ export const ResultDisplay = ({ result, darkMode }) => {
     (isIntrovert ? 'text-indigo-800' : 'text-green-800');
 
   return (
-    <div className={`w-full p-8 ${bgColor} rounded-4xl border-l-4 ${borderColor} transition-all duration-300`}>
+    <div className={`w-full p-8 ${bgColor} rounded-4xl border-l-4 ${borderColor} transition-all duration-300 shadow-lg`}>
       <div className="flex flex-col items-center">
         <img 
           src={imageSrc} 
@@ -33,7 +33,7 @@ export const ResultDisplay = ({ result, darkMode }) => {
           <div className="flex justify-between items-center mb-6">
             <span className={`${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>Confidence:</span>
             <div className="flex items-center">
-              <div className={`w-32 h-2 rounded-full mr-3 ${darkMode ? 'bg-gray-700' : 'bg-gray-200'}`}>
+              <div className={`w-32 h-2 rounded-full mr-3 ${darkMode ? 'bg-gray-700' : 'bg-gray-300'}`}>
                 <div 
                   className={`h-full rounded-full ${isIntrovert ? 'bg-indigo-500' : 'bg-green-500'}`}
                   style={{ width: `${result.confidence * 100}%` }}
