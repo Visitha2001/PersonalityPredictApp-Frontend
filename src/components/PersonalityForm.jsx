@@ -178,7 +178,7 @@ export const PersonalityForm = () => {
 
       <div className="flex flex-col md:flex-row container mx-auto">
         {/* Form Section */}
-        <div className={`w-full md:w-1/2 mt-10 rounded-4xl px-8 py-10 ${darkMode ? 'bg-gray-800' : 'bg-gray-200'} shadow-lg`}>
+        <div className={`w-full md:w-1/2 mt-10 rounded-4xl px-8 py-10 ${darkMode ? 'bg-gray-800' : 'bg-gray-200 border-2 border-gray-500'} shadow-lg`}>
           <div className="mx-auto">
             <div className="flex justify-between items-center mb-2">
               <h1 className="text-3xl font-bold bg-gradient-to-r from-purple-400 to-blue-500 bg-clip-text text-transparent">
@@ -223,7 +223,7 @@ export const PersonalityForm = () => {
             
             <form onSubmit={handleSubmit} className="space-y-8">
               {/* Time Spent Section */}
-              <div className={`p-5 rounded-lg ${darkMode ? 'bg-gray-700/50' : 'bg-gray-300/30'}`}>
+              <div className={`p-5 rounded-lg ${darkMode ? 'bg-gray-700/50' : 'bg-gray-300/30 border border-dashed border-gray-400'}`}>
                 <h2 className={`text-lg font-semibold mb-4 ${darkMode ? 'text-blue-300' : 'text-blue-600'}`}>
                   Time Spent
                 </h2>
@@ -244,7 +244,7 @@ export const PersonalityForm = () => {
                         step={field.step}
                         min={field.min}
                         max={field.max}
-                        className={`w-full px-4 py-2 rounded-md focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 ${darkMode ? 'bg-gray-600 border-gray-500 text-white' : 'border-gray-300 bg-white'}`}
+                        className={`w-full px-4 py-2 rounded-md focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 ${darkMode ? 'bg-gray-600 border-gray-500 text-white' : 'border border-gray-500 bg-white'}`}
                         required
                       />
                     </div>
@@ -253,7 +253,7 @@ export const PersonalityForm = () => {
               </div>
 
               {/* Social Activity Section */}
-              <div className={`p-5 rounded-lg ${darkMode ? 'bg-gray-700/50' : 'bg-gray-300/30'}`}>
+              <div className={`p-5 rounded-lg ${darkMode ? 'bg-gray-700/50' : 'bg-gray-300/30 border border-dashed border-gray-400'}`}>
                 <h2 className={`text-lg font-semibold mb-4 ${darkMode ? 'text-purple-300' : 'text-purple-600'}`}>
                   Social Activity
                 </h2>
@@ -273,7 +273,7 @@ export const PersonalityForm = () => {
                         onChange={handleChange}
                         min={field.min}
                         max={field.max}
-                        className={`w-full px-4 py-2 rounded-md focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 ${darkMode ? 'bg-gray-600 border-gray-500 text-white' : 'border-gray-300 bg-white'}`}
+                        className={`w-full px-4 py-2 rounded-md focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 ${darkMode ? 'bg-gray-600 border-gray-500 text-white' : 'border border-gray-500 bg-white'}`}
                         required
                       />
                     </div>
@@ -282,7 +282,7 @@ export const PersonalityForm = () => {
               </div>
 
               {/* Psychological Factors Section */}
-              <div className={`p-5 rounded-lg ${darkMode ? 'bg-gray-700/50' : 'bg-gray-300/30'}`}>
+              <div className={`p-5 rounded-lg ${darkMode ? 'bg-gray-700/50' : 'bg-gray-300/30 border border-dashed border-gray-400'}`}>
                 <h2 className={`text-lg font-semibold mb-4 ${darkMode ? 'text-green-300' : 'text-green-600'}`}>
                   Psychological Factors
                 </h2>
@@ -362,7 +362,7 @@ export const PersonalityForm = () => {
         </div>
 
         {/* Result Section */}
-        <div className={`w-full md:w-1/2 mt-10 flex items-center justify-center p-8 ${darkMode ? 'bg-gray-900' : 'bg-gray-200'}`}>
+        <div className={`w-full md:w-1/2 mt-10 flex items-center rounded-4xl ml-2 justify-center p-8 ${darkMode ? 'bg-gray-900' : 'bg-gray-200'}`}>
           {result ? (
             <ResultDisplay result={result} darkMode={darkMode} />
           ) : (

@@ -10,8 +10,8 @@ export const ResultDisplay = ({ result, darkMode }) => {
     (isIntrovert ? 'bg-indigo-200' : 'bg-green-200');
   
   const borderColor = darkMode ? 
-    (isIntrovert ? 'border-indigo-500' : 'border-green-500') : 
-    (isIntrovert ? 'border-indigo-300' : 'border-green-300');
+    (isIntrovert ? 'border-indigo-500' : 'border-green-800') : 
+    (isIntrovert ? 'border-indigo-300' : 'border-green-800');
   
   const textColor = darkMode ? 
     (isIntrovert ? 'text-indigo-300' : 'text-green-300') : 
